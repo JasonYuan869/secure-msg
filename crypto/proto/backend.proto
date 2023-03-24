@@ -1,23 +1,35 @@
 syntax = "proto3";
-package crypto;
+package backend;
 
 service ChatService {
   rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
 }
 
-message CreateChatRequest {}
+enum Algorithm {
+  RSA = 0;
+  DH_CHACHA = 1;
+}
+
+message CreateChatRequest {
+  Algorithm algorithm = 1;
+  string room_name = 2;
+}
 
 message CreateChatReply {
   string chat_id = 1;
 }
 
-message JoinChatMessage {
+message JoinChatRequest {
   string name = 1;
   string chat_id = 2;
-  string public_key = 3;
+  string pub_key = 3;
+}
+
+message JoinChatReply {
+  string other_pub = 1;
 }
 
 message ChatMessage {
   string name = 1;
-  string message = 2;
+  string ciphertext = 2;
 }
