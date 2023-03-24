@@ -1,0 +1,23 @@
+syntax = "proto3";
+package crypto;
+
+service ChatService {
+  rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
+}
+
+message CreateChatRequest {}
+
+message CreateChatReply {
+  string chat_id = 1;
+}
+
+message JoinChatMessage {
+  string name = 1;
+  string chat_id = 2;
+  string public_key = 3;
+}
+
+message ChatMessage {
+  string name = 1;
+  string message = 2;
+}
